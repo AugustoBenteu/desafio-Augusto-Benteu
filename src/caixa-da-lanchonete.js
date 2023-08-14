@@ -24,22 +24,20 @@ class CaixaDaLanchonete {
     let valorPedido = 0.0;
     let itensPedido = [];
 
-    itens.forEach((item) => {
+    for(let item of itens) {
       let [nome, qtd] = item.split(",");
 
-      if (qtd == "0") resposta = "Quantidade inválida!";
+      if (qtd == "0") return "Quantidade inválida!";
         
       const produto = cardapio[nome];
 
-      if (!produto) resposta = "Item inválido!";
+      if (!produto) return "Item inválido!";
 
-      if (produto.dependeDe && !itensPedido.includes(produto.dependeDe)) resposta = "Item extra não pode ser pedido sem o principal";
+      if (produto.dependeDe && !itensPedido.includes(produto.dependeDe)) return "Item extra não pode ser pedido sem o principal";
         
       itensPedido.push(nome);
       valorPedido += produto.preco * qtd;
-    });
-
-    if (typeof resposta !== "undefined") return resposta;
+    };
 
     valorPedido = this.recalculaValor(valorPedido, metodoDePagamento);
 
@@ -51,6 +49,7 @@ class CaixaDaLanchonete {
   }
 
   recalculaValor(valor, metodoDePagamento) {
+    if(!multiplicadorMetodoDePagamento[metodoDePagamento]) return -1;
     return valor * multiplicadorMetodoDePagamento[metodoDePagamento];
   }
 
