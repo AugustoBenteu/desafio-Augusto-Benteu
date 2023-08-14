@@ -27,23 +27,14 @@ class CaixaDaLanchonete {
     itens.forEach((item) => {
       let [nome, qtd] = item.split(",");
 
-      if (qtd == "0") {
-        resposta = "Quantidade inválida!";
-        return false;
-      }
-
+      if (qtd == "0") resposta = "Quantidade inválida!";
+        
       const produto = cardapio[nome];
 
-      if (!produto) {
-        resposta = "Item inválido!";
-        return false;
-      }
+      if (!produto) resposta = "Item inválido!";
 
-      if (produto.dependeDe && !itensPedido.includes(produto.dependeDe)) {
-        resposta = "Item extra não pode ser pedido sem o principal";
-        return false;
-      }
-
+      if (produto.dependeDe && !itensPedido.includes(produto.dependeDe)) resposta = "Item extra não pode ser pedido sem o principal";
+        
       itensPedido.push(nome);
       valorPedido += produto.preco * qtd;
     });
@@ -60,19 +51,7 @@ class CaixaDaLanchonete {
   }
 
   recalculaValor(valor, metodoDePagamento) {
-    switch (metodoDePagamento) {
-      case "dinheiro":
-        valor = valor * 0.95;
-        break;
-      case "debito":
-        break;
-      case "credito":
-        valor = valor * 1.03;
-        break;
-      default:
-        valor = -1;
-    }
-    return valor;
+    return valor * multiplicadorMetodoDePagamento[metodoDePagamento];
   }
 
   formataResposta(valor) {
