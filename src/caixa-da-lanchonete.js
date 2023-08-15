@@ -42,7 +42,7 @@ class CaixaDaLanchonete {
 
     if (valorPedido == -1) return "Forma de pagamento inválida!";
 
-    return this.formataResposta(valorPedido);;
+    return this.formataResposta(valorPedido);
   }
 
   recalculaValor(valor, metodoDePagamento) {
