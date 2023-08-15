@@ -17,7 +17,6 @@ const multiplicadorMetodoDePagamento = {
 
 class CaixaDaLanchonete {
   calcularValorDaCompra(metodoDePagamento, itens) {
-    let resposta;
 
     if (itens.length == 0) return "Não há itens no carrinho de compra!";
 
@@ -43,9 +42,7 @@ class CaixaDaLanchonete {
 
     if (valorPedido == -1) return "Forma de pagamento inválida!";
 
-    resposta = this.formataResposta(valorPedido);
-
-    return resposta;
+    return this.formataResposta(valorPedido);;
   }
 
   recalculaValor(valor, metodoDePagamento) {
